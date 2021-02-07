@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Posts ✅</h1>
+	
+	{% for message in app.flashes('success') %}
+	<div class="alert alert-success" role="alert">
+		<h4 class="alert-header">{{ 'Notification' }}</h4>
+		{{ message|raw }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endfor %}
+	
+	{% for message in app.flashes('warning') %}
+	<div class="alert alert-warning" role="alert">
+		<h4 class="alert-header">{{ 'Notification' }}</h4>
+		{{ message|raw }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endfor %}
+	
+	<table class="table table-sm table-stripe table-bordered border-primary table-hover">
+	  <thead>
+		<tr>
+		  <th scope="col">Id #</th>
+		  <th scope="col">Titlee</th>
+		  <th scope="col">Actions</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		{% for post in posts %}
+		<tr>
+		  <th scope="row">{{ post.id }}</th>
+		  <td>{{ post.title }}</td>
+		  <th>
+			<a href="{{ path('post.show', {id: post.id}) }}" class="btn btn-secondary">{{ 'Show' }}</a>
+			<a href="{{ path('post.remove', {id: post.id}) }}" class="btn btn-danger">{{ 'Remove' }}</a>
+		  </th>
+		</tr>
+		{% endfor %}
+	  </tbody>
+	</table>
+</div>
+{% endblock %}
